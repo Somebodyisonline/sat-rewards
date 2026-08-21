@@ -21,19 +21,23 @@
             --black: #151515;
             --white: #ffffff;
             --gray: #667085;
+            --light-gray: #eef1f4;
             --red: #dc2626;
+            --success: #166534;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: var(--green);
             color: var(--black);
+            min-height: 100vh;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
             padding: 20px 8%;
             background: var(--white);
             border-bottom: 3px solid var(--black);
@@ -59,6 +63,7 @@
             justify-content: center;
             font-weight: 900;
             font-size: 17px;
+            flex-shrink: 0;
         }
 
         .account-area {
@@ -73,6 +78,7 @@
             padding: 10px 16px;
             border-radius: 10px;
             font-weight: 700;
+            white-space: nowrap;
         }
 
         .account-button {
@@ -83,6 +89,7 @@
             border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .account-button:hover {
@@ -92,11 +99,11 @@
         main {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 20px;
-            text-align: center;
+            padding: 70px 20px;
         }
 
         .hero {
+            text-align: center;
             max-width: 760px;
             margin: 0 auto;
         }
@@ -132,17 +139,27 @@
             line-height: 1.6;
         }
 
-        .watch-button {
-            display: inline-block;
-            background: var(--black);
-            color: var(--white);
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .watch-button,
+        .test-button {
             border: 3px solid var(--black);
-            padding: 16px 32px;
+            padding: 15px 28px;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
             cursor: pointer;
             transition: 0.15s ease;
+        }
+
+        .watch-button {
+            background: var(--black);
+            color: var(--white);
         }
 
         .watch-button:hover {
@@ -151,11 +168,29 @@
             transform: translateY(-2px);
         }
 
-        .how-it-works {
-            margin-top: 90px;
+        .test-button {
+            background: var(--yellow);
+            color: var(--black);
+            display: none;
         }
 
-        .how-it-works h2 {
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .test-note {
+            margin-top: 12px;
+            color: var(--gray);
+            font-size: 13px;
+            display: none;
+        }
+
+        .section {
+            margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
             font-size: 34px;
             margin-bottom: 30px;
         }
@@ -171,7 +206,6 @@
             padding: 30px 25px;
             border-radius: 16px;
             border: 3px solid var(--black);
-            text-align: left;
         }
 
         .step-number {
@@ -197,12 +231,89 @@
             line-height: 1.5;
         }
 
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.show {
+            display: block;
+        }
+
+        .dashboard-card {
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .dashboard-card p {
+            color: var(--gray);
+        }
+
+        .big-balance {
+            font-size: 42px;
+            font-weight: 900;
+            margin-top: 12px;
+        }
+
+        .transaction-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 16px;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .transaction-left {
+            min-width: 0;
+        }
+
+        .transaction-type {
+            font-weight: 800;
+        }
+
+        .transaction-date {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 3px;
+        }
+
+        .transaction-amount {
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .transaction-amount.positive {
+            color: var(--success);
+        }
+
+        .empty-transactions {
+            color: var(--gray);
+            padding: 12px 0;
+        }
+
         .trust {
             margin-top: 55px;
             background: var(--green-dark);
             border: 3px solid var(--black);
             border-radius: 16px;
             padding: 25px;
+            text-align: center;
         }
 
         .trust h3 {
@@ -216,9 +327,15 @@
 
         footer {
             text-align: center;
-            padding: 35px;
+            padding: 35px 20px;
             font-size: 14px;
             color: #526052;
+        }
+
+        footer a {
+            color: var(--black);
+            font-weight: 800;
+            text-decoration: underline;
         }
 
         /* Account modal */
@@ -261,7 +378,6 @@
 
         .form-group {
             margin-bottom: 16px;
-            text-align: left;
         }
 
         .form-group label {
@@ -283,17 +399,20 @@
             border-color: var(--black);
         }
 
-        .primary-button {
+        .primary-button,
+        .secondary-button {
             width: 100%;
-            background: var(--black);
-            color: var(--white);
-            border: 2px solid var(--black);
             padding: 13px;
             border-radius: 10px;
             font-size: 16px;
             font-weight: 800;
             cursor: pointer;
-            margin-top: 5px;
+        }
+
+        .primary-button {
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--black);
         }
 
         .primary-button:hover {
@@ -302,15 +421,9 @@
         }
 
         .secondary-button {
-            width: 100%;
             background: var(--white);
             color: var(--black);
             border: 2px solid var(--black);
-            padding: 11px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
             margin-top: 10px;
         }
 
@@ -358,7 +471,7 @@
         }
 
         .message.success {
-            color: #166534;
+            color: var(--success);
         }
 
         @media (max-width: 700px) {
@@ -368,6 +481,20 @@
 
             .logo {
                 font-size: 20px;
+            }
+
+            .account-area {
+                gap: 6px;
+            }
+
+            .balance {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+
+            .account-button {
+                font-size: 13px;
+                padding: 8px 10px;
             }
 
             .hero h1 {
@@ -382,13 +509,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .balance {
-                font-size: 14px;
-                padding: 8px 10px;
+            .big-balance {
+                font-size: 34px;
             }
 
-            .account-button {
-                display: none;
+            .transaction {
+                align-items: flex-start;
             }
         }
     </style>
@@ -425,7 +551,9 @@
 
         <section class="hero">
 
-            <div class="tag">DIRECT REWARDS</div>
+            <div class="tag">
+                DIRECT REWARDS
+            </div>
 
             <h1>
                 Watch ads.<br>
@@ -433,33 +561,102 @@
             </h1>
 
             <p>
-                Direct Sat gives you small Bitcoin rewards for voluntarily
-                watching advertisements. No points, no fake currency,
-                no complicated games.
+                Direct Sat gives you small Bitcoin rewards for
+                voluntarily watching advertisements. No points,
+                no fake currency, no complicated games.
             </p>
 
-            <button class="watch-button" onclick="watchAd()">
-                Watch an Ad
-            </button>
+            <div class="hero-buttons">
+
+                <button
+                    class="watch-button"
+                    onclick="watchAd()">
+                    Watch an Ad
+                </button>
+
+                <button
+                    class="test-button"
+                    id="testRewardButton"
+                    onclick="giveTestReward()">
+                    Earn 10 Test SATS
+                </button>
+
+            </div>
+
+            <div
+                class="test-note"
+                id="testNote">
+                Development mode: this button gives test SATS only.
+            </div>
 
         </section>
 
 
-        <section class="how-it-works">
+        <section
+            class="dashboard section"
+            id="dashboard">
 
-            <h2>How It Works</h2>
+            <div class="dashboard-card">
+
+                <h2>Your Balance</h2>
+
+                <p>
+                    SATS currently stored in your Direct Sat account.
+                </p>
+
+                <div
+                    class="big-balance"
+                    id="bigBalance">
+                    0 SATS
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <h2>Recent Activity</h2>
+
+                <p>
+                    Your latest account transactions.
+                </p>
+
+                <div
+                    class="transaction-list"
+                    id="transactionList">
+
+                    <div class="empty-transactions">
+                        No transactions yet.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section">
+
+            <h2 class="section-title">
+                How It Works
+            </h2>
 
             <div class="steps">
 
                 <div class="step">
 
-                    <div class="step-number">1</div>
+                    <div class="step-number">
+                        1
+                    </div>
 
-                    <h3>Watch</h3>
+                    <h3>
+                        Watch
+                    </h3>
 
                     <p>
-                        Choose an available advertisement and watch it
-                        voluntarily.
+                        Choose an available advertisement and
+                        watch it voluntarily.
                     </p>
 
                 </div>
@@ -467,13 +664,17 @@
 
                 <div class="step">
 
-                    <div class="step-number">2</div>
+                    <div class="step-number">
+                        2
+                    </div>
 
-                    <h3>Earn</h3>
+                    <h3>
+                        Earn
+                    </h3>
 
                     <p>
-                        After the ad is successfully verified, your SAT
-                        balance increases.
+                        After the ad is successfully verified,
+                        your SAT balance increases.
                     </p>
 
                 </div>
@@ -481,13 +682,17 @@
 
                 <div class="step">
 
-                    <div class="step-number">3</div>
+                    <div class="step-number">
+                        3
+                    </div>
 
-                    <h3>Withdraw</h3>
+                    <h3>
+                        Withdraw
+                    </h3>
 
                     <p>
-                        Keep your SATS in your account until you are ready
-                        to withdraw them.
+                        Keep your SATS in your account until
+                        you are ready to withdraw them.
                     </p>
 
                 </div>
@@ -499,11 +704,14 @@
 
         <section class="trust">
 
-            <h3>Simple by design.</h3>
+            <h3>
+                Simple by design.
+            </h3>
 
             <p>
-                Direct Sat is built around one idea: if you earn SATS,
-                you should be able to see exactly how much you earned.
+                Direct Sat is built around one idea: if you earn
+                SATS, you should be able to see exactly how much
+                you earned.
             </p>
 
         </section>
@@ -512,13 +720,28 @@
 
 
     <footer>
-        Direct Sat — Prototype
+
+        <div>
+            Direct Sat — Prototype
+        </div>
+
+        <div style="margin-top: 8px;">
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfgSMugpsIeK2PNjOnPHTY3_5i590l5Ridje86mGS6XAOyyDA/viewform?usp=publish-editor"
+                target="_blank"
+                rel="noopener noreferrer">
+                Support / Help
+            </a>
+        </div>
+
     </footer>
 
 
     <!-- Account Modal -->
 
-    <div class="modal-overlay" id="accountModal">
+    <div
+        class="modal-overlay"
+        id="accountModal">
 
         <div class="modal">
 
@@ -529,7 +752,10 @@
             </button>
 
 
-            <h2 id="modalTitle">Log In</h2>
+            <h2 id="modalTitle">
+                Log In
+            </h2>
+
 
             <p
                 class="modal-subtitle"
@@ -635,7 +861,7 @@
     </div>
 
 
-    <!-- Supabase Library -->
+    <!-- Supabase -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -654,7 +880,7 @@
 
 
         /* =========================================
-           SUPABASE CLIENT
+           CREATE SUPABASE CLIENT
            ========================================= */
 
         const { createClient } = supabase;
@@ -673,7 +899,7 @@
 
 
         /* =========================================
-           DOM ELEMENTS
+           ELEMENTS
            ========================================= */
 
         const accountModal =
@@ -715,6 +941,21 @@
         const balanceDisplay =
             document.getElementById("balanceDisplay");
 
+        const bigBalance =
+            document.getElementById("bigBalance");
+
+        const dashboard =
+            document.getElementById("dashboard");
+
+        const testRewardButton =
+            document.getElementById("testRewardButton");
+
+        const testNote =
+            document.getElementById("testNote");
+
+        const transactionList =
+            document.getElementById("transactionList");
+
 
         /* =========================================
            MODAL
@@ -732,7 +973,7 @@
 
 
         /* =========================================
-           ACCOUNT MODE
+           LOGIN / SIGNUP MODE
            ========================================= */
 
         function switchAccountMode() {
@@ -821,19 +1062,17 @@
                 logoutButton.style.display =
                     "block";
 
-                openAccountModal();
-
             } else {
 
                 resetAccountForm();
-
-                openAccountModal();
             }
+
+            openAccountModal();
         }
 
 
         /* =========================================
-           LOGIN / SIGNUP FORM
+           AUTHENTICATION
            ========================================= */
 
         accountForm.addEventListener(
@@ -904,13 +1143,13 @@
 
                         if (data.session) {
 
+                            await loadUserProfile(
+                                data.user
+                            );
+
                             showMessage(
                                 "Account created successfully.",
                                 "success"
-                            );
-
-                            await loadUserProfile(
-                                data.user
                             );
 
                             setTimeout(
@@ -925,9 +1164,6 @@
                                 "success"
                             );
                         }
-
-
-                        resetAccountForm();
 
                     }
 
@@ -946,7 +1182,6 @@
                                     email: email,
 
                                     password: password
-
                                 });
 
 
@@ -961,7 +1196,7 @@
 
 
                         showMessage(
-                            "Logged in successfully!",
+                            "Logged in successfully.",
                             "success"
                         );
 
@@ -991,26 +1226,17 @@
                     submitButton.disabled =
                         false;
 
-                    if (
-                        accountMode ===
-                        "signup"
-                    ) {
-
-                        submitButton.textContent =
-                            "Create Account";
-
-                    } else {
-
-                        submitButton.textContent =
-                            "Log In";
-                    }
+                    submitButton.textContent =
+                        accountMode === "signup"
+                            ? "Create Account"
+                            : "Log In";
                 }
             }
         );
 
 
         /* =========================================
-           LOAD USER PROFILE
+           LOAD PROFILE
            ========================================= */
 
         async function loadUserProfile(user) {
@@ -1019,7 +1245,7 @@
 
                 setLoggedOutState();
 
-                return;
+                return false;
             }
 
 
@@ -1032,7 +1258,10 @@
                     .select(
                         "username, balance_sats"
                     )
-                    .eq("id", user.id)
+                    .eq(
+                        "id",
+                        user.id
+                    )
                     .single();
 
 
@@ -1043,21 +1272,245 @@
                     error
                 );
 
-                return;
+                return false;
             }
 
 
-            balanceDisplay.textContent =
-                `${profile.balance_sats ?? 0} SATS`;
+            const balance =
+                Number(
+                    profile.balance_sats || 0
+                );
 
+
+            balanceDisplay.textContent =
+                `${balance} SATS`;
+
+            bigBalance.textContent =
+                `${balance} SATS`;
 
             accountButton.textContent =
                 profile.username ||
                 "Account";
 
-
             accountButton.dataset.loggedIn =
                 "true";
+
+            dashboard.classList.add("show");
+
+            testRewardButton.style.display =
+                "inline-block";
+
+            testNote.style.display =
+                "block";
+
+
+            await loadTransactions(
+                user.id
+            );
+
+
+            return true;
+        }
+
+
+        /* =========================================
+           LOAD TRANSACTIONS
+           ========================================= */
+
+        async function loadTransactions(
+            userId
+        ) {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("transactions")
+                    .select(
+                        "amount_sats, type, description, created_at"
+                    )
+                    .eq(
+                        "user_id",
+                        userId
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    )
+                    .limit(10);
+
+
+            if (error) {
+
+                console.error(
+                    "Could not load transactions:",
+                    error
+                );
+
+                transactionList.innerHTML =
+                    `<div class="empty-transactions">
+                        Unable to load transactions.
+                    </div>`;
+
+                return;
+            }
+
+
+            if (!data || data.length === 0) {
+
+                transactionList.innerHTML =
+                    `<div class="empty-transactions">
+                        No transactions yet.
+                    </div>`;
+
+                return;
+            }
+
+
+            transactionList.innerHTML =
+                data
+                    .map(
+                        transaction => {
+
+                            const amount =
+                                Number(
+                                    transaction.amount_sats
+                                );
+
+                            const sign =
+                                amount >= 0
+                                    ? "+"
+                                    : "";
+
+                            const date =
+                                new Date(
+                                    transaction.created_at
+                                ).toLocaleString();
+
+
+                            return `
+                                <div class="transaction">
+
+                                    <div class="transaction-left">
+
+                                        <div class="transaction-type">
+                                            ${escapeHtml(
+                                                transaction.description ||
+                                                transaction.type
+                                            )}
+                                        </div>
+
+                                        <div class="transaction-date">
+                                            ${escapeHtml(date)}
+                                        </div>
+
+                                    </div>
+
+                                    <div
+                                        class="transaction-amount ${
+                                            amount >= 0
+                                                ? "positive"
+                                                : ""
+                                        }">
+
+                                        ${sign}${amount} SATS
+
+                                    </div>
+
+                                </div>
+                            `;
+                        }
+                    )
+                    .join("");
+        }
+
+
+        /* =========================================
+           TEST REWARD
+           ========================================= */
+
+        async function giveTestReward() {
+
+            const {
+                data: {
+                    user
+                }
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (!user) {
+
+                showMessage(
+                    "You must be logged in.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            testRewardButton.disabled =
+                true;
+
+            testRewardButton.textContent =
+                "Adding 10 SATS...";
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.rpc(
+                        "grant_test_reward"
+                    );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                await loadUserProfile(
+                    user
+                );
+
+
+                showMessage(
+                    `Test reward added. Your balance is now ${data} SATS.`,
+                    "success"
+                );
+
+                openAccountModal();
+
+            } catch (error) {
+
+                console.error(
+                    "Test reward error:",
+                    error
+                );
+
+                showMessage(
+                    error.message ||
+                    "Could not add the test reward.",
+                    "error"
+                );
+
+                openAccountModal();
+
+            } finally {
+
+                testRewardButton.disabled =
+                    false;
+
+                testRewardButton.textContent =
+                    "Earn 10 Test SATS";
+            }
         }
 
 
@@ -1100,11 +1553,29 @@
             balanceDisplay.textContent =
                 "0 SATS";
 
+            bigBalance.textContent =
+                "0 SATS";
+
             accountButton.textContent =
                 "Log In";
 
             accountButton.dataset.loggedIn =
                 "false";
+
+            dashboard.classList.remove(
+                "show"
+            );
+
+            testRewardButton.style.display =
+                "none";
+
+            testNote.style.display =
+                "none";
+
+            transactionList.innerHTML =
+                `<div class="empty-transactions">
+                    No transactions yet.
+                </div>`;
         }
 
 
@@ -1198,67 +1669,73 @@
 
         function watchAd() {
 
-            alert(
-                "The advertising system hasn't been connected yet."
+            showMessage(
+                "The real advertising system has not been connected yet.",
+                "success"
             );
+
+            openAccountModal();
         }
 
 
         /* =========================================
-           INITIALIZE PAGE
+           SAFE HTML ESCAPING
+           ========================================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
+
+
+        /* =========================================
+           INITIALIZE
            ========================================= */
 
         async function initialize() {
 
+            setLoggedOutState();
+
+
             const {
                 data: {
-                    session
+                    user
                 }
             } =
                 await supabaseClient.auth
-                    .getSession();
+                    .getUser();
 
 
-            if (session) {
+            if (user) {
 
                 await loadUserProfile(
-                    session.user
+                    user
                 );
-
-            } else {
-
-                setLoggedOutState();
             }
         }
 
-
-        /* =========================================
-           AUTH STATE CHANGES
-           ========================================= */
-
-        supabaseClient.auth.onAuthStateChange(
-            async (
-                event,
-                session
-            ) => {
-
-                if (session) {
-
-                    await loadUserProfile(
-                        session.user
-                    );
-
-                } else {
-
-                    setLoggedOutState();
-                }
-            }
-        );
-
-
-        /* =========================================
-           START
-           ========================================= */
 
         initialize();
 
