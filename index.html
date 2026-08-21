@@ -404,6 +404,7 @@
         </div>
 
         <div class="account-area">
+
             <div class="balance" id="balanceDisplay">
                 0 SATS
             </div>
@@ -414,9 +415,11 @@
                 onclick="handleAccountButton()">
                 Log In
             </button>
+
         </div>
 
     </header>
+
 
     <main>
 
@@ -441,6 +444,7 @@
 
         </section>
 
+
         <section class="how-it-works">
 
             <h2>How It Works</h2>
@@ -448,6 +452,7 @@
             <div class="steps">
 
                 <div class="step">
+
                     <div class="step-number">1</div>
 
                     <h3>Watch</h3>
@@ -456,9 +461,12 @@
                         Choose an available advertisement and watch it
                         voluntarily.
                     </p>
+
                 </div>
 
+
                 <div class="step">
+
                     <div class="step-number">2</div>
 
                     <h3>Earn</h3>
@@ -467,9 +475,12 @@
                         After the ad is successfully verified, your SAT
                         balance increases.
                     </p>
+
                 </div>
 
+
                 <div class="step">
+
                     <div class="step-number">3</div>
 
                     <h3>Withdraw</h3>
@@ -478,11 +489,13 @@
                         Keep your SATS in your account until you are ready
                         to withdraw them.
                     </p>
+
                 </div>
 
             </div>
 
         </section>
+
 
         <section class="trust">
 
@@ -497,6 +510,7 @@
 
     </main>
 
+
     <footer>
         Direct Sat — Prototype
     </footer>
@@ -508,69 +522,91 @@
 
         <div class="modal">
 
-            <button class="modal-close" onclick="closeAccountModal()">
+            <button
+                class="modal-close"
+                onclick="closeAccountModal()">
                 ×
             </button>
 
+
             <h2 id="modalTitle">Log In</h2>
 
-            <p class="modal-subtitle" id="modalSubtitle">
+            <p
+                class="modal-subtitle"
+                id="modalSubtitle">
                 Log in to view your Direct Sat balance.
             </p>
+
 
             <form id="accountForm">
 
                 <div
                     class="form-group"
                     id="usernameGroup"
-                    style="display: none;"
-                >
-                    <label for="username">Username</label>
+                    style="display: none;">
+
+                    <label for="username">
+                        Username
+                    </label>
 
                     <input
                         type="text"
                         id="username"
                         maxlength="30"
-                        autocomplete="username"
-                    >
+                        autocomplete="username">
+
                 </div>
 
+
                 <div class="form-group">
-                    <label for="email">Email</label>
+
+                    <label for="email">
+                        Email
+                    </label>
 
                     <input
                         type="email"
                         id="email"
                         required
-                        autocomplete="email"
-                    >
+                        autocomplete="email">
+
                 </div>
 
+
                 <div class="form-group">
-                    <label for="password">Password</label>
+
+                    <label for="password">
+                        Password
+                    </label>
 
                     <input
                         type="password"
                         id="password"
                         required
                         minlength="6"
-                        autocomplete="current-password"
-                    >
+                        autocomplete="current-password">
+
                 </div>
+
 
                 <button
                     type="submit"
                     class="primary-button"
-                    id="submitButton"
-                >
+                    id="submitButton">
                     Log In
                 </button>
 
             </form>
 
-            <div class="message" id="message"></div>
+
+            <div
+                class="message"
+                id="message">
+            </div>
+
 
             <div class="switch-text">
+
                 <span id="switchQuestion">
                     Don't have an account?
                 </span>
@@ -578,19 +614,19 @@
                 <button
                     type="button"
                     id="switchButton"
-                    onclick="switchAccountMode()"
-                >
+                    onclick="switchAccountMode()">
                     Sign Up
                 </button>
+
             </div>
+
 
             <button
                 type="button"
                 class="secondary-button"
                 id="logoutButton"
                 style="display: none;"
-                onclick="logout()"
-            >
+                onclick="logout()">
                 Log Out
             </button>
 
@@ -599,23 +635,26 @@
     </div>
 
 
-    <!-- Supabase -->
+    <!-- Supabase Library -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
     <script>
 
         /* =========================================
-           PUT YOUR SUPABASE VALUES HERE
+           SUPABASE CONFIGURATION
            ========================================= */
 
-        const SUPABASE_URL = "https://ojlcyiwhucwqvwivduhw.supabase.co";
+        const SUPABASE_URL =
+            "https://ojlcyiwhucwqvwivduhw.supabase.co";
 
-        const SUPABASE_KEY = "sb_publishable_gB9xa_wt-UHZWqkOW4TKmA_HIAVkGoC";
+        const SUPABASE_KEY =
+            "sb_publishable_gB9xa_wt-UHZWqkOW4TKmA_HIAVkGoC";
 
 
         /* =========================================
-           CONNECT TO SUPABASE
+           SUPABASE CLIENT
            ========================================= */
 
         const { createClient } = supabase;
@@ -678,12 +717,13 @@
 
 
         /* =========================================
-           OPEN / CLOSE ACCOUNT WINDOW
+           MODAL
            ========================================= */
 
         function openAccountModal() {
             accountModal.classList.add("show");
         }
+
 
         function closeAccountModal() {
             accountModal.classList.remove("show");
@@ -692,7 +732,7 @@
 
 
         /* =========================================
-           SWITCH LOGIN / SIGNUP
+           ACCOUNT MODE
            ========================================= */
 
         function switchAccountMode() {
@@ -703,41 +743,51 @@
 
                 accountMode = "signup";
 
-                modalTitle.textContent = "Create Account";
+                modalTitle.textContent =
+                    "Create Account";
 
                 modalSubtitle.textContent =
                     "Create an account to save your Direct Sat balance.";
 
-                usernameGroup.style.display = "block";
+                usernameGroup.style.display =
+                    "block";
 
-                usernameInput.required = true;
+                usernameInput.required =
+                    true;
 
-                submitButton.textContent = "Create Account";
+                submitButton.textContent =
+                    "Create Account";
 
                 switchQuestion.textContent =
                     "Already have an account?";
 
-                switchButton.textContent = "Log In";
+                switchButton.textContent =
+                    "Log In";
 
             } else {
 
                 accountMode = "login";
 
-                modalTitle.textContent = "Log In";
+                modalTitle.textContent =
+                    "Log In";
 
                 modalSubtitle.textContent =
                     "Log in to view your Direct Sat balance.";
 
-                usernameGroup.style.display = "none";
+                usernameGroup.style.display =
+                    "none";
 
-                usernameInput.required = false;
+                usernameInput.required =
+                    false;
 
-                submitButton.textContent = "Log In";
+                submitButton.textContent =
+                    "Log In";
 
                 switchQuestion.textContent =
                     "Don't have an account?";
 
-                switchButton.textContent = "Sign Up";
+                switchButton.textContent =
+                    "Sign Up";
             }
         }
 
@@ -748,29 +798,32 @@
 
         function handleAccountButton() {
 
-            if (accountButton.dataset.loggedIn === "true") {
+            if (
+                accountButton.dataset.loggedIn ===
+                "true"
+            ) {
 
-                accountMode = "login";
-
-                modalTitle.textContent = "Your Account";
+                modalTitle.textContent =
+                    "Your Account";
 
                 modalSubtitle.textContent =
                     "Your Direct Sat account is currently signed in.";
 
-                document.getElementById("accountForm").style.display =
+                accountForm.style.display =
                     "none";
 
-                switchQuestion.style.display = "none";
+                switchQuestion.style.display =
+                    "none";
 
-                switchButton.style.display = "none";
+                switchButton.style.display =
+                    "none";
 
-                logoutButton.style.display = "block";
+                logoutButton.style.display =
+                    "block";
 
                 openAccountModal();
 
             } else {
-
-                accountMode = "login";
 
                 resetAccountForm();
 
@@ -780,127 +833,180 @@
 
 
         /* =========================================
-           SIGN UP / LOGIN
+           LOGIN / SIGNUP FORM
            ========================================= */
 
-        accountForm.addEventListener("submit", async function(event) {
+        accountForm.addEventListener(
+            "submit",
+            async function(event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            clearMessage();
+                clearMessage();
 
-            const email =
-                document.getElementById("email").value.trim();
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
 
-            const password =
-                document.getElementById("password").value;
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
 
-            submitButton.disabled = true;
-            submitButton.textContent = "Please wait...";
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Please wait...";
 
 
-            try {
+                try {
 
-                if (accountMode === "signup") {
+                    /* SIGN UP */
 
-                    const username =
-                        usernameInput.value.trim();
+                    if (accountMode === "signup") {
 
-                    if (username.length < 3) {
-                        throw new Error(
-                            "Your username must be at least 3 characters."
-                        );
-                    }
+                        const username =
+                            usernameInput.value.trim();
 
-                    const { data, error } =
-                        await supabaseClient.auth.signUp({
+                        if (username.length < 3) {
 
-                            email: email,
+                            throw new Error(
+                                "Your username must be at least 3 characters."
+                            );
+                        }
 
-                            password: password,
 
-                            options: {
-                                data: {
-                                    username: username
+                        const {
+                            data,
+                            error
+                        } =
+                            await supabaseClient.auth.signUp({
+
+                                email: email,
+
+                                password: password,
+
+                                options: {
+                                    data: {
+                                        username: username
+                                    }
                                 }
-                            }
 
-                        });
+                            });
 
 
-                    if (error) {
-                        throw error;
+                        if (error) {
+                            throw error;
+                        }
+
+
+                        if (data.session) {
+
+                            showMessage(
+                                "Account created successfully.",
+                                "success"
+                            );
+
+                            await loadUserProfile(
+                                data.user
+                            );
+
+                            setTimeout(
+                                closeAccountModal,
+                                800
+                            );
+
+                        } else {
+
+                            showMessage(
+                                "Account created. Check your email to confirm your account.",
+                                "success"
+                            );
+                        }
+
+
+                        resetAccountForm();
+
                     }
 
 
-                    /*
-                     * Depending on your Supabase email-confirmation
-                     * setting, the user may need to confirm their
-                     * email before they can log in.
-                     */
+                    /* LOG IN */
 
-                    if (data.session) {
+                    else {
+
+                        const {
+                            data,
+                            error
+                        } =
+                            await supabaseClient.auth
+                                .signInWithPassword({
+
+                                    email: email,
+
+                                    password: password
+
+                                });
+
+
+                        if (error) {
+                            throw error;
+                        }
+
+
+                        await loadUserProfile(
+                            data.user
+                        );
+
 
                         showMessage(
-                            "Account created successfully.",
+                            "Logged in successfully!",
                             "success"
                         );
+
+
+                        setTimeout(
+                            closeAccountModal,
+                            800
+                        );
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Authentication error:",
+                        error
+                    );
+
+                    showMessage(
+                        error.message ||
+                        "Something went wrong.",
+                        "error"
+                    );
+
+                } finally {
+
+                    submitButton.disabled =
+                        false;
+
+                    if (
+                        accountMode ===
+                        "signup"
+                    ) {
+
+                        submitButton.textContent =
+                            "Create Account";
 
                     } else {
 
-                        showMessage(
-                            "Account created. Check your email to confirm your account.",
-                            "success"
-                        );
+                        submitButton.textContent =
+                            "Log In";
                     }
-
-
-                    accountMode = "login";
-
-                    document.getElementById("accountForm").reset();
-
-                    switchAccountMode();
-
-
-                } else {
-
-                    const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
-
-if (error) {
-    throw error;
-}
-
-showMessage(
-    "Logged in successfully!",
-    "success"
-);
-
-await loadUserProfile(data.user);
-
-
-            } catch (error) {
-
-                showMessage(
-                    error.message || "Something went wrong.",
-                    "error"
-                );
-
-            } finally {
-
-                submitButton.disabled = false;
-
-                if (accountMode === "signup") {
-                    submitButton.textContent = "Create Account";
-                } else {
-                    submitButton.textContent = "Log In";
                 }
             }
-
-        });
+        );
 
 
         /* =========================================
@@ -909,39 +1015,25 @@ await loadUserProfile(data.user);
 
         async function loadUserProfile(user) {
 
-    if (!user) {
-        setLoggedOutState();
-        return;
-    }
+            if (!user) {
 
-    const { data: profile, error } = await supabaseClient
-        .from("profiles")
-        .select("username, balance_sats")
-        .eq("id", user.id)
-        .single();
+                setLoggedOutState();
 
-    if (error) {
-        console.error("Could not load profile:", error);
-        return;
-    }
+                return;
+            }
 
-    balanceDisplay.textContent =
-        `${profile.balance_sats ?? 0} SATS`;
-
-    accountButton.textContent =
-        profile.username || "Account";
-
-    accountButton.dataset.loggedIn = "true";
-}
 
             const {
                 data: profile,
                 error
-            } = await supabaseClient
-                .from("profiles")
-                .select("username, balance_sats")
-                .eq("id", user.id)
-                .single();
+            } =
+                await supabaseClient
+                    .from("profiles")
+                    .select(
+                        "username, balance_sats"
+                    )
+                    .eq("id", user.id)
+                    .single();
 
 
             if (error) {
@@ -951,8 +1043,6 @@ await loadUserProfile(data.user);
                     error
                 );
 
-                setLoggedOutState();
-
                 return;
             }
 
@@ -960,10 +1050,14 @@ await loadUserProfile(data.user);
             balanceDisplay.textContent =
                 `${profile.balance_sats ?? 0} SATS`;
 
-            accountButton.textContent =
-                profile.username || "Account";
 
-            accountButton.dataset.loggedIn = "true";
+            accountButton.textContent =
+                profile.username ||
+                "Account";
+
+
+            accountButton.dataset.loggedIn =
+                "true";
         }
 
 
@@ -973,8 +1067,12 @@ await loadUserProfile(data.user);
 
         async function logout() {
 
-            const { error } =
-                await supabaseClient.auth.signOut();
+            const {
+                error
+            } =
+                await supabaseClient.auth
+                    .signOut();
+
 
             if (error) {
 
@@ -986,6 +1084,7 @@ await loadUserProfile(data.user);
                 return;
             }
 
+
             closeAccountModal();
 
             setLoggedOutState();
@@ -993,7 +1092,7 @@ await loadUserProfile(data.user);
 
 
         /* =========================================
-           LOGGED-OUT STATE
+           LOGGED OUT STATE
            ========================================= */
 
         function setLoggedOutState() {
@@ -1015,7 +1114,7 @@ await loadUserProfile(data.user);
 
         function resetAccountForm() {
 
-            document.getElementById("accountForm").style.display =
+            accountForm.style.display =
                 "block";
 
             switchQuestion.style.display =
@@ -1027,30 +1126,42 @@ await loadUserProfile(data.user);
             logoutButton.style.display =
                 "none";
 
-            accountMode = "login";
+
+            accountMode =
+                "login";
+
 
             modalTitle.textContent =
                 "Log In";
 
+
             modalSubtitle.textContent =
                 "Log in to view your Direct Sat balance.";
+
 
             usernameGroup.style.display =
                 "none";
 
+
             usernameInput.required =
                 false;
+
 
             submitButton.textContent =
                 "Log In";
 
+
             switchQuestion.textContent =
                 "Don't have an account?";
+
 
             switchButton.textContent =
                 "Sign Up";
 
-            document.getElementById("accountForm").reset();
+
+            accountForm.reset();
+
+            clearMessage();
         }
 
 
@@ -1058,9 +1169,13 @@ await loadUserProfile(data.user);
            MESSAGES
            ========================================= */
 
-        function showMessage(text, type) {
+        function showMessage(
+            text,
+            type
+        ) {
 
-            message.textContent = text;
+            message.textContent =
+                text;
 
             message.className =
                 `message show ${type}`;
@@ -1069,7 +1184,8 @@ await loadUserProfile(data.user);
 
         function clearMessage() {
 
-            message.textContent = "";
+            message.textContent =
+                "";
 
             message.className =
                 "message";
@@ -1083,13 +1199,13 @@ await loadUserProfile(data.user);
         function watchAd() {
 
             alert(
-                "The advertising system hasn't been connected yet. Try again later bro."
+                "The advertising system hasn't been connected yet."
             );
         }
 
 
         /* =========================================
-           CHECK LOGIN WHEN PAGE LOADS
+           INITIALIZE PAGE
            ========================================= */
 
         async function initialize() {
@@ -1098,33 +1214,51 @@ await loadUserProfile(data.user);
                 data: {
                     session
                 }
-            } = await supabaseClient.auth.getSession();
+            } =
+                await supabaseClient.auth
+                    .getSession();
 
 
             if (session) {
-                await loadUserProfile(session.user);
+
+                await loadUserProfile(
+                    session.user
+                );
+
             } else {
+
                 setLoggedOutState();
             }
         }
 
 
         /* =========================================
-           WATCH FOR LOGIN / LOGOUT CHANGES
+           AUTH STATE CHANGES
            ========================================= */
 
         supabaseClient.auth.onAuthStateChange(
-            async (event, session) => {
+            async (
+                event,
+                session
+            ) => {
 
                 if (session) {
-                    await loadUserProfile();
+
+                    await loadUserProfile(
+                        session.user
+                    );
+
                 } else {
+
                     setLoggedOutState();
                 }
-
             }
         );
 
+
+        /* =========================================
+           START
+           ========================================= */
 
         initialize();
 
