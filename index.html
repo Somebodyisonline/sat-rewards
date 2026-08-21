@@ -1,0 +1,202 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SAT Rewards</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .balance {
+            background: #eef2ff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #667085;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            line-height: 1.6;
+        }
+
+        .watch-button {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .watch-button:hover {
+            background: #273244;
+        }
+
+        .how-it-works {
+            margin-top: 80px;
+        }
+
+        .how-it-works h2 {
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #667085;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #98a2b3;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">SAT Rewards</div>
+
+        <div class="balance">
+            Balance: 0 SATS
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <h1>Watch Ads. Earn SATS.</h1>
+
+            <p>
+                Watch voluntary advertisements and earn small Bitcoin
+                rewards for your time.
+            </p>
+
+            <button class="watch-button" onclick="watchAd()">
+                Watch an Ad
+            </button>
+        </section>
+
+        <section class="how-it-works">
+
+            <h2>How It Works</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <h3>1. Watch</h3>
+                    <p>
+                        Choose an available advertisement and watch it.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <h3>2. Earn</h3>
+                    <p>
+                        Receive a reward after the advertisement is
+                        successfully completed and verified.
+                    </p>
+                </div>
+
+                <div class="step">
+                    <h3>3. Withdraw</h3>
+                    <p>
+                        Build your balance and eventually withdraw your
+                        eligible rewards.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        SAT Rewards — Prototype
+    </footer>
+
+    <script>
+        function watchAd() {
+            alert("The advertisement system hasn't been connected yet.");
+        }
+    </script>
+
+</body>
+</html>
+```
