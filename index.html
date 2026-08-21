@@ -21,6 +21,7 @@
             --black: #151515;
             --white: #ffffff;
             --gray: #667085;
+            --red: #dc2626;
         }
 
         body {
@@ -60,12 +61,32 @@
             font-size: 17px;
         }
 
+        .account-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .balance {
             background: var(--black);
             color: var(--yellow);
             padding: 10px 16px;
             border-radius: 10px;
             font-weight: 700;
+        }
+
+        .account-button {
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--black);
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .account-button:hover {
+            background: var(--yellow);
         }
 
         main {
@@ -200,9 +221,153 @@
             color: #526052;
         }
 
+        /* Account modal */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            width: 100%;
+            max-width: 430px;
+            border: 3px solid var(--black);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .modal h2 {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .modal-subtitle {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 700;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #b8bec8;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--black);
+        }
+
+        .primary-button {
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--black);
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .primary-button:hover {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .secondary-button {
+            width: 100%;
+            background: var(--white);
+            color: var(--black);
+            border: 2px solid var(--black);
+            padding: 11px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .secondary-button:hover {
+            background: var(--green);
+        }
+
+        .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 18px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .switch-text button {
+            background: none;
+            border: none;
+            color: var(--black);
+            text-decoration: underline;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 14px;
+            font-size: 14px;
+            line-height: 1.4;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.error {
+            color: var(--red);
+        }
+
+        .message.success {
+            color: #166534;
+        }
+
         @media (max-width: 700px) {
             header {
                 padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 20px;
             }
 
             .hero h1 {
@@ -221,6 +386,10 @@
                 font-size: 14px;
                 padding: 8px 10px;
             }
+
+            .account-button {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -234,8 +403,17 @@
             Direct Sat
         </div>
 
-        <div class="balance">
-            0 SATS
+        <div class="account-area">
+            <div class="balance" id="balanceDisplay">
+                0 SATS
+            </div>
+
+            <button
+                class="account-button"
+                id="accountButton"
+                onclick="handleAccountButton()">
+                Log In
+            </button>
         </div>
 
     </header>
@@ -253,7 +431,8 @@
 
             <p>
                 Direct Sat gives you small Bitcoin rewards for voluntarily
-                watching advertisements. That's all there is to it!
+                watching advertisements. No points, no fake currency,
+                no complicated games.
             </p>
 
             <button class="watch-button" onclick="watchAd()">
@@ -285,7 +464,7 @@
                     <h3>Earn</h3>
 
                     <p>
-                        As soon as the ad is successfully verified, and we get our share of the ad revenue, your SAT
+                        After the ad is successfully verified, your SAT
                         balance increases.
                     </p>
                 </div>
@@ -305,20 +484,652 @@
 
         </section>
 
+        <section class="trust">
+
+            <h3>Simple by design.</h3>
+
+            <p>
+                Direct Sat is built around one idea: if you earn SATS,
+                you should be able to see exactly how much you earned.
+            </p>
+
+        </section>
+
     </main>
 
     <footer>
-        Direct Sat — Prototype / 
-        An Aadvik Empire Website / 
-        Subscribe to OP Aadvik YT
+        Direct Sat — Prototype
     </footer>
 
+
+    <!-- Account Modal -->
+
+    <div class="modal-overlay" id="accountModal">
+
+        <div class="modal">
+
+            <button class="modal-close" onclick="closeAccountModal()">
+                ×
+            </button>
+
+            <h2 id="modalTitle">Log In</h2>
+
+            <p class="modal-subtitle" id="modalSubtitle">
+                Log in to view your Direct Sat balance.
+            </p>
+
+            <form id="accountForm">
+
+                <div
+                    class="form-group"
+                    id="usernameGroup"
+                    style="display: none;"
+                >
+                    <label for="username">Username</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        maxlength="30"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        minlength="6"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="submitButton"
+                >
+                    Log In
+                </button>
+
+            </form>
+
+            <div class="message" id="message"></div>
+
+            <div class="switch-text">
+                <span id="switchQuestion">
+                    Don't have an account?
+                </span>
+
+                <button
+                    type="button"
+                    id="switchButton"
+                    onclick="switchAccountMode()"
+                >
+                    Sign Up
+                </button>
+            </div>
+
+            <button
+                type="button"
+                class="secondary-button"
+                id="logoutButton"
+                style="display: none;"
+                onclick="logout()"
+            >
+                Log Out
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Supabase -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
+
+        /* =========================================
+           PUT YOUR SUPABASE VALUES HERE
+           ========================================= */
+
         const SUPABASE_URL = "https://direct-sat.supabase.co";
+
         const SUPABASE_KEY = "sb_publishable_gB9xa_wt-UHZWqkOW4TKmA_HIAVkGoC";
+
+
+        /* =========================================
+           CONNECT TO SUPABASE
+           ========================================= */
+
+        const { createClient } = supabase;
+
+        const supabaseClient = createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+        /* =========================================
+           PAGE STATE
+           ========================================= */
+
+        let accountMode = "login";
+
+
+        /* =========================================
+           DOM ELEMENTS
+           ========================================= */
+
+        const accountModal =
+            document.getElementById("accountModal");
+
+        const modalTitle =
+            document.getElementById("modalTitle");
+
+        const modalSubtitle =
+            document.getElementById("modalSubtitle");
+
+        const usernameGroup =
+            document.getElementById("usernameGroup");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const accountForm =
+            document.getElementById("accountForm");
+
+        const submitButton =
+            document.getElementById("submitButton");
+
+        const switchQuestion =
+            document.getElementById("switchQuestion");
+
+        const switchButton =
+            document.getElementById("switchButton");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const message =
+            document.getElementById("message");
+
+        const accountButton =
+            document.getElementById("accountButton");
+
+        const balanceDisplay =
+            document.getElementById("balanceDisplay");
+
+
+        /* =========================================
+           OPEN / CLOSE ACCOUNT WINDOW
+           ========================================= */
+
+        function openAccountModal() {
+            accountModal.classList.add("show");
+        }
+
+        function closeAccountModal() {
+            accountModal.classList.remove("show");
+            clearMessage();
+        }
+
+
+        /* =========================================
+           SWITCH LOGIN / SIGNUP
+           ========================================= */
+
+        function switchAccountMode() {
+
+            clearMessage();
+
+            if (accountMode === "login") {
+
+                accountMode = "signup";
+
+                modalTitle.textContent = "Create Account";
+
+                modalSubtitle.textContent =
+                    "Create an account to save your Direct Sat balance.";
+
+                usernameGroup.style.display = "block";
+
+                usernameInput.required = true;
+
+                submitButton.textContent = "Create Account";
+
+                switchQuestion.textContent =
+                    "Already have an account?";
+
+                switchButton.textContent = "Log In";
+
+            } else {
+
+                accountMode = "login";
+
+                modalTitle.textContent = "Log In";
+
+                modalSubtitle.textContent =
+                    "Log in to view your Direct Sat balance.";
+
+                usernameGroup.style.display = "none";
+
+                usernameInput.required = false;
+
+                submitButton.textContent = "Log In";
+
+                switchQuestion.textContent =
+                    "Don't have an account?";
+
+                switchButton.textContent = "Sign Up";
+            }
+        }
+
+
+        /* =========================================
+           ACCOUNT BUTTON
+           ========================================= */
+
+        function handleAccountButton() {
+
+            if (accountButton.dataset.loggedIn === "true") {
+
+                accountMode = "login";
+
+                modalTitle.textContent = "Your Account";
+
+                modalSubtitle.textContent =
+                    "Your Direct Sat account is currently signed in.";
+
+                document.getElementById("accountForm").style.display =
+                    "none";
+
+                switchQuestion.style.display = "none";
+
+                switchButton.style.display = "none";
+
+                logoutButton.style.display = "block";
+
+                openAccountModal();
+
+            } else {
+
+                accountMode = "login";
+
+                resetAccountForm();
+
+                openAccountModal();
+            }
+        }
+
+
+        /* =========================================
+           SIGN UP / LOGIN
+           ========================================= */
+
+        accountForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            clearMessage();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Please wait...";
+
+
+            try {
+
+                if (accountMode === "signup") {
+
+                    const username =
+                        usernameInput.value.trim();
+
+                    if (username.length < 3) {
+                        throw new Error(
+                            "Your username must be at least 3 characters."
+                        );
+                    }
+
+                    const { data, error } =
+                        await supabaseClient.auth.signUp({
+
+                            email: email,
+
+                            password: password,
+
+                            options: {
+                                data: {
+                                    username: username
+                                }
+                            }
+
+                        });
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    /*
+                     * Depending on your Supabase email-confirmation
+                     * setting, the user may need to confirm their
+                     * email before they can log in.
+                     */
+
+                    if (data.session) {
+
+                        showMessage(
+                            "Account created successfully.",
+                            "success"
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "Account created. Check your email to confirm your account.",
+                            "success"
+                        );
+                    }
+
+
+                    accountMode = "login";
+
+                    document.getElementById("accountForm").reset();
+
+                    switchAccountMode();
+
+
+                } else {
+
+                    const { error } =
+                        await supabaseClient.auth.signInWithPassword({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    showMessage(
+                        "Logged in successfully.",
+                        "success"
+                    );
+
+                    await loadUserProfile();
+
+                    setTimeout(() => {
+                        closeAccountModal();
+                    }, 800);
+                }
+
+
+            } catch (error) {
+
+                showMessage(
+                    error.message || "Something went wrong.",
+                    "error"
+                );
+
+            } finally {
+
+                submitButton.disabled = false;
+
+                if (accountMode === "signup") {
+                    submitButton.textContent = "Create Account";
+                } else {
+                    submitButton.textContent = "Log In";
+                }
+            }
+
+        });
+
+
+        /* =========================================
+           LOAD USER PROFILE
+           ========================================= */
+
+        async function loadUserProfile() {
+
+            const {
+                data: {
+                    user
+                }
+            } = await supabaseClient.auth.getUser();
+
+
+            if (!user) {
+
+                setLoggedOutState();
+
+                return;
+            }
+
+
+            const {
+                data: profile,
+                error
+            } = await supabaseClient
+                .from("profiles")
+                .select("username, balance_sats")
+                .eq("id", user.id)
+                .single();
+
+
+            if (error) {
+
+                console.error(
+                    "Could not load profile:",
+                    error
+                );
+
+                setLoggedOutState();
+
+                return;
+            }
+
+
+            balanceDisplay.textContent =
+                `${profile.balance_sats ?? 0} SATS`;
+
+            accountButton.textContent =
+                profile.username || "Account";
+
+            accountButton.dataset.loggedIn = "true";
+        }
+
+
+        /* =========================================
+           LOG OUT
+           ========================================= */
+
+        async function logout() {
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+            if (error) {
+
+                showMessage(
+                    error.message,
+                    "error"
+                );
+
+                return;
+            }
+
+            closeAccountModal();
+
+            setLoggedOutState();
+        }
+
+
+        /* =========================================
+           LOGGED-OUT STATE
+           ========================================= */
+
+        function setLoggedOutState() {
+
+            balanceDisplay.textContent =
+                "0 SATS";
+
+            accountButton.textContent =
+                "Log In";
+
+            accountButton.dataset.loggedIn =
+                "false";
+        }
+
+
+        /* =========================================
+           RESET ACCOUNT FORM
+           ========================================= */
+
+        function resetAccountForm() {
+
+            document.getElementById("accountForm").style.display =
+                "block";
+
+            switchQuestion.style.display =
+                "block";
+
+            switchButton.style.display =
+                "inline";
+
+            logoutButton.style.display =
+                "none";
+
+            accountMode = "login";
+
+            modalTitle.textContent =
+                "Log In";
+
+            modalSubtitle.textContent =
+                "Log in to view your Direct Sat balance.";
+
+            usernameGroup.style.display =
+                "none";
+
+            usernameInput.required =
+                false;
+
+            submitButton.textContent =
+                "Log In";
+
+            switchQuestion.textContent =
+                "Don't have an account?";
+
+            switchButton.textContent =
+                "Sign Up";
+
+            document.getElementById("accountForm").reset();
+        }
+
+
+        /* =========================================
+           MESSAGES
+           ========================================= */
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className =
+                `message show ${type}`;
+        }
+
+
+        function clearMessage() {
+
+            message.textContent = "";
+
+            message.className =
+                "message";
+        }
+
+
+        /* =========================================
+           WATCH AD
+           ========================================= */
+
+        function watchAd() {
+
+            alert(
+                "The advertising system hasn't been connected yet."
+            );
+        }
+
+
+        /* =========================================
+           CHECK LOGIN WHEN PAGE LOADS
+           ========================================= */
+
+        async function initialize() {
+
+            const {
+                data: {
+                    session
+                }
+            } = await supabaseClient.auth.getSession();
+
+
+            if (session) {
+                await loadUserProfile();
+            } else {
+                setLoggedOutState();
+            }
+        }
+
+
+        /* =========================================
+           WATCH FOR LOGIN / LOGOUT CHANGES
+           ========================================= */
+
+        supabaseClient.auth.onAuthStateChange(
+            async (event, session) => {
+
+                if (session) {
+                    await loadUserProfile();
+                } else {
+                    setLoggedOutState();
+                }
+
+            }
+        );
+
+
+        initialize();
+
     </script>
 
 </body>
 </html>
 ```
-
