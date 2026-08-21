@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SAT Rewards</title>
+    <title>Direct Sat — Watch Ads, Earn SATS</title>
 
     <style>
         * {
@@ -14,10 +14,19 @@
             padding: 0;
         }
 
+        :root {
+            --green: #dff7df;
+            --green-dark: #bce8bc;
+            --yellow: #ffd43b;
+            --black: #151515;
+            --white: #ffffff;
+            --gray: #667085;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #172033;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--green);
+            color: var(--black);
         }
 
         header {
@@ -25,65 +34,109 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
+            background: var(--white);
+            border-bottom: 3px solid var(--black);
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 24px;
-            font-weight: bold;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--yellow);
+            border: 3px solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 17px;
         }
 
         .balance {
-            background: #eef2ff;
+            background: var(--black);
+            color: var(--yellow);
             padding: 10px 16px;
             border-radius: 10px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         main {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 80px 20px;
             text-align: center;
         }
 
+        .hero {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--yellow);
+            border: 2px solid var(--black);
+            padding: 7px 13px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 22px;
+        }
+
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 60px;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            background: var(--yellow);
+            padding: 0 8px;
         }
 
         .hero p {
-            font-size: 19px;
-            color: #667085;
-            max-width: 600px;
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 650px;
             margin: 0 auto 35px;
             line-height: 1.6;
         }
 
         .watch-button {
             display: inline-block;
-            background: #111827;
-            color: white;
-            border: none;
-            padding: 16px 30px;
+            background: var(--black);
+            color: var(--white);
+            border: 3px solid var(--black);
+            padding: 16px 32px;
             border-radius: 12px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
+            transition: 0.15s ease;
         }
 
         .watch-button:hover {
-            background: #273244;
+            background: var(--yellow);
+            color: var(--black);
+            transform: translateY(-2px);
         }
 
         .how-it-works {
-            margin-top: 80px;
+            margin-top: 90px;
         }
 
         .how-it-works h2 {
+            font-size: 34px;
             margin-bottom: 30px;
-            font-size: 30px;
         }
 
         .steps {
@@ -93,35 +146,80 @@
         }
 
         .step {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #e5e7eb;
+            background: var(--white);
+            padding: 30px 25px;
+            border-radius: 16px;
+            border: 3px solid var(--black);
+            text-align: left;
+        }
+
+        .step-number {
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            background: var(--yellow);
+            border: 2px solid var(--black);
+            border-radius: 50%;
+            font-weight: 900;
+            margin-bottom: 18px;
         }
 
         .step h3 {
+            font-size: 20px;
             margin-bottom: 10px;
         }
 
         .step p {
-            color: #667085;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .trust {
+            margin-top: 55px;
+            background: var(--green-dark);
+            border: 3px solid var(--black);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .trust h3 {
+            margin-bottom: 8px;
+        }
+
+        .trust p {
+            color: #3f5140;
             line-height: 1.5;
         }
 
         footer {
             text-align: center;
-            padding: 30px;
-            color: #98a2b3;
+            padding: 35px;
             font-size: 14px;
+            color: #526052;
         }
 
         @media (max-width: 700px) {
+            header {
+                padding: 16px 5%;
+            }
+
             .hero h1 {
-                font-size: 36px;
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
             }
 
             .steps {
                 grid-template-columns: 1fr;
+            }
+
+            .balance {
+                font-size: 14px;
+                padding: 8px 10px;
             }
         }
     </style>
@@ -130,26 +228,38 @@
 <body>
 
     <header>
-        <div class="logo">SAT Rewards</div>
+
+        <div class="logo">
+            <div class="logo-mark">₿</div>
+            Direct Sat
+        </div>
 
         <div class="balance">
-            Balance: 0 SATS
+            0 SATS
         </div>
+
     </header>
 
     <main>
 
         <section class="hero">
-            <h1>Watch Ads. Earn SATS.</h1>
+
+            <div class="tag">DIRECT REWARDS</div>
+
+            <h1>
+                Watch ads.<br>
+                Get <span>SATS.</span>
+            </h1>
 
             <p>
-                Watch voluntary advertisements and earn small Bitcoin
-                rewards for your time.
+                Direct Sat gives you small Bitcoin rewards for voluntarily
+                watching advertisements. That's all there is to it!
             </p>
 
             <button class="watch-button" onclick="watchAd()">
                 Watch an Ad
             </button>
+
         </section>
 
         <section class="how-it-works">
@@ -159,25 +269,35 @@
             <div class="steps">
 
                 <div class="step">
-                    <h3>1. Watch</h3>
+                    <div class="step-number">1</div>
+
+                    <h3>Watch</h3>
+
                     <p>
-                        Choose an available advertisement and watch it.
+                        Choose an available advertisement and watch it
+                        voluntarily.
                     </p>
                 </div>
 
                 <div class="step">
-                    <h3>2. Earn</h3>
+                    <div class="step-number">2</div>
+
+                    <h3>Earn</h3>
+
                     <p>
-                        Receive a reward after the advertisement is
-                        successfully completed and verified.
+                        As soon as the ad is successfully verified, and we get our share of the ad revenue, your SAT
+                        balance increases.
                     </p>
                 </div>
 
                 <div class="step">
-                    <h3>3. Withdraw</h3>
+                    <div class="step-number">3</div>
+
+                    <h3>Withdraw</h3>
+
                     <p>
-                        Build your balance and eventually withdraw your
-                        eligible rewards.
+                        Keep your SATS in your account until you are ready
+                        to withdraw them.
                     </p>
                 </div>
 
@@ -188,15 +308,18 @@
     </main>
 
     <footer>
-        SAT Rewards — Prototype
+        Direct Sat — Prototype
+        An Aadvik Empire Website
+        Subscribe to OP Aadvik YT
     </footer>
 
     <script>
         function watchAd() {
-            alert("The advertisement system hasn't been connected yet.");
+            alert("Sorry bro, the advertising system hasn't been connected yet. Check again later!");
         }
     </script>
 
 </body>
 </html>
 ```
+
