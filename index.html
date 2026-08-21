@@ -864,32 +864,22 @@
 
                 } else {
 
-                    const { error } =
-                        await supabaseClient.auth.signInWithPassword({
+                    const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
 
-                            email: email,
+if (error) {
+    throw error;
+}
 
-                            password: password
+showMessage(
+    "Logged in successfully!",
+    "success"
+);
 
-                        });
-
-
-                    if (error) {
-                        throw error;
-                    }
-
-
-                    showMessage(
-                        "Logged in successfully.",
-                        "success"
-                    );
-
-                    await loadUserProfile();
-
-                    setTimeout(() => {
-                        closeAccountModal();
-                    }, 800);
-                }
+await loadUserProfile(data.user);
 
 
             } catch (error) {
@@ -917,22 +907,32 @@
            LOAD USER PROFILE
            ========================================= */
 
-        async function loadUserProfile() {
+        async function loadUserProfile(user) {
 
-            const {
-                data: {
-                    user
-                }
-            } = await supabaseClient.auth.getUser();
+    if (!user) {
+        setLoggedOutState();
+        return;
+    }
 
+    const { data: profile, error } = await supabaseClient
+        .from("profiles")
+        .select("username, balance_sats")
+        .eq("id", user.id)
+        .single();
 
-            if (!user) {
+    if (error) {
+        console.error("Could not load profile:", error);
+        return;
+    }
 
-                setLoggedOutState();
+    balanceDisplay.textContent =
+        `${profile.balance_sats ?? 0} SATS`;
 
-                return;
-            }
+    accountButton.textContent =
+        profile.username || "Account";
 
+    accountButton.dataset.loggedIn = "true";
+}
 
             const {
                 data: profile,
@@ -1083,7 +1083,7 @@
         function watchAd() {
 
             alert(
-                "The advertising system hasn't been connected yet."
+                "The advertising system hasn't been connected yet. Try again later bro."
             );
         }
 
@@ -1102,7 +1102,7 @@
 
 
             if (session) {
-                await loadUserProfile();
+                await loadUserProfile(session.user);
             } else {
                 setLoggedOutState();
             }
